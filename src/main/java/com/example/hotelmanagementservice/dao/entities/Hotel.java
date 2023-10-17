@@ -1,5 +1,6 @@
 package com.example.hotelmanagementservice.dao.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,8 +29,12 @@ public class Hotel implements Serializable {
     private double prixParNuit;
 
     @OneToMany(mappedBy = "hotel")
+    @JsonIgnore
     private List<Chambre> chambres;
 
+    @OneToMany(mappedBy = "hotel")
+    @JsonIgnore
+    private List<Reservation> reservations;
 
     public Hotel(String nom, String adresse, String description, int etoiles, double prixParNuit) {
         this.nom = nom;

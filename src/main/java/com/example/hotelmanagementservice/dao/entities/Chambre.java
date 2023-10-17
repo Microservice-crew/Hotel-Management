@@ -1,5 +1,6 @@
 package com.example.hotelmanagementservice.dao.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -26,9 +28,12 @@ public class Chambre implements Serializable {
     private int capacite;
     private double prixParNuit;
     private boolean disponibilite;
+
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
+
 
     public Chambre(int numeroChambre, TypeChambre type, int capacite, double prixParNuit, boolean disponibilite) {
         this.numeroChambre = numeroChambre;

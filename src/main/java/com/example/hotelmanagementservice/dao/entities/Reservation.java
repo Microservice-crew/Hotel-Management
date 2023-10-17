@@ -1,5 +1,6 @@
 package com.example.hotelmanagementservice.dao.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,19 +19,22 @@ public class Reservation {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer idReservation;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "chambre_id")
     private Chambre chambre;
 
 
     private LocalDate dateArrivee;
     private LocalDate dateDepart;
+
     private StatutReservation statut;
 
     // getters et setters
@@ -48,7 +52,7 @@ public class Reservation {
 
     // Getters
     public Integer getId() {
-        return id;
+        return idReservation;
     }
 
     public Hotel getHotel() {
@@ -73,8 +77,8 @@ public class Reservation {
 
 
     // Setters
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idReservation) {
+        this.idReservation = idReservation;
     }
 
     public void setHotel(Hotel hotel) {
