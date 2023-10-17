@@ -27,7 +27,6 @@ public class Hotel implements Serializable {
     private int etoiles;
     private double prixParNuit;
 
-
     @OneToMany(mappedBy = "hotel")
     private List<Chambre> chambres;
 

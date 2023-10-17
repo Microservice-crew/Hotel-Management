@@ -26,7 +26,6 @@ public class Chambre implements Serializable {
     private int capacite;
     private double prixParNuit;
     private boolean disponibilite;
-
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;

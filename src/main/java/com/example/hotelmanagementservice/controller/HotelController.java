@@ -22,7 +22,7 @@ public class HotelController {
         return hotelService.getAllHotels();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{idHotel}")
     public Hotel getHotelById(@PathVariable Integer idHotel) {
         return hotelService.getHotelById(idHotel);
     }
@@ -32,7 +32,7 @@ public class HotelController {
         return hotelService.createHotel(hotel);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{idHotel}")
     public Hotel updateHotel(@PathVariable Integer idHotel, @RequestBody Hotel hotel) {
         return hotelService.updateHotel(idHotel, hotel);
     }
@@ -41,5 +41,4 @@ public class HotelController {
     public void deleteHotel(@PathVariable Integer idHotel) {
         hotelService.deleteHotel(idHotel);
     }
-
 }
