@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
@@ -26,6 +27,18 @@ public class ReservationController {
     private HotelRepository hotelRepository; // Assurez-vous que HotelRepository est correctement configuré
     @Autowired
     private ChambreRepository chambreRepository; // Assurez-vous que ChambreRepository est correctement configuré
+
+
+    @GetMapping
+    public List<Reservation> getAllReservations() {
+        return reservationService.getAllReservations();
+    }
+
+    @GetMapping("/{idReservation}")
+    public Reservation getReservationById(@PathVariable Integer idReservation) {
+        return reservationService.getReservationById(idReservation);
+    }
+
 
     @PostMapping("/add/{hotelId}/{chambreId}")
     public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation, @PathVariable Integer hotelId, @PathVariable Integer chambreId) {
@@ -41,7 +54,17 @@ public class ReservationController {
     }
 
 
+    @PutMapping("/{idReservation}")
+    public Reservation updateReservation(@PathVariable Integer idReservation, @RequestBody Reservation reservation) {
+        return reservationService.updateReservation(idReservation, reservation);
+    }
 
+
+
+    @DeleteMapping("/{idReservation}")
+    public void deleteReservation(@PathVariable Integer idReservation) {
+        reservationService.deleteReservation(idReservation);
+    }
 
 
 

@@ -9,6 +9,7 @@ import com.example.hotelmanagementservice.dao.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,28 +28,46 @@ public class ReservationServiceImpl implements ReservationService{
         return reservationRepository.save(reservation);
     }
 
-    @Override
-    public Reservation addReservationToHotelAndChambre(Integer idHotel, Integer idChambre, Reservation reserv) {
-        Optional<Chambre> parentChambreOptional = chambreRepository.findById(idChambre);
-        if (parentChambreOptional.isPresent()) {
-            Chambre chambre = parentChambreOptional.get();
-            Optional<Hotel> hotelOptional = hotelRepository.findById(idHotel);
-            if (hotelOptional.isPresent()) {
-                Hotel hotel = hotelOptional.get();
-                reserv.setHotel(hotel);
-                reserv.setChambre(chambre);
-                return reservationRepository.save(reserv);
-            }
-        }
-        return null;
-    }
-
     public Reservation addReservation(Reservation reservation, Hotel hotel, Chambre chambre) {
         reservation.setHotel(hotel);
         reservation.setChambre(chambre);
         return reservationRepository.save(reservation);
     }
 
+    @Override
+    public List<Reservation> getAllReservations() {
+        return reservationRepository.findAll();
+    }
+
+    @Override
+    public Reservation getReservationById(Integer idReservation) {
+        return reservationRepository.findById(idReservation).orElse(null);
+    }
+
+    @Override
+    public Reservation updateReservation(Integer idReservation, Reservation reservation) {
+
+        Reservation existingReservation = reservationRepository.findById(idReservation).orElse(null);
+        if (existingReservation != null) {
+            // Mettez à jour les champs nécessaires de l'employé existant avec les nouvelles valeurs
+            existingReservation.setHotel(reservation.getHotel());
+            existingReservation.setChambre(reservation.getChambre());
+            existingReservation.setDateArrivee(reservation.getDateArrivee());
+            existingReservation.setDateDepart(reservation.getDateDepart());
+            existingReservation.setStatut(reservation.getStatut());
+
+            // Enregistrez les modifications dans la base de données
+            return reservationRepository.save(existingReservation);
+        }
+        return null;
+
+
+    }
+
+    @Override
+    public void deleteReservation(Integer idReservation) {
+        reservationRepository.deleteById(idReservation);
+    }
 
 
 }
