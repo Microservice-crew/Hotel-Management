@@ -3,6 +3,7 @@ package com.example.hotelmanagementservice.servicesHotel;
 import com.example.hotelmanagementservice.dao.entities.Chambre;
 import com.example.hotelmanagementservice.dao.entities.Hotel;
 import com.example.hotelmanagementservice.dao.entities.Reservation;
+import com.example.hotelmanagementservice.dao.entities.User;
 import com.example.hotelmanagementservice.dao.repository.ChambreRepository;
 import com.example.hotelmanagementservice.dao.repository.HotelRepository;
 import com.example.hotelmanagementservice.dao.repository.ReservationRepository;
@@ -22,13 +23,18 @@ public class ReservationServiceImpl implements ReservationService{
     @Autowired
     ReservationRepository reservationRepository;
 
+    @Autowired
+    userServices userServices;
+
 
     @Override
     public Reservation createReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
     }
 
-    public Reservation addReservation(Reservation reservation, Hotel hotel, Chambre chambre) {
+    public Reservation addReservation(Reservation reservation, Hotel hotel, Chambre chambre,String userId) {
+        User user = userServices.getUserById(userId);
+        reservation.setUserId(user.get_id());
         reservation.setHotel(hotel);
         reservation.setChambre(chambre);
         return reservationRepository.save(reservation);

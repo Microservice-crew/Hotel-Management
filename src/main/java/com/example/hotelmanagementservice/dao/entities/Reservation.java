@@ -32,6 +32,8 @@ public class Reservation {
     private Chambre chambre;
 
 
+    private String userId ;
+
     private LocalDate dateArrivee;
     private LocalDate dateDepart;
 

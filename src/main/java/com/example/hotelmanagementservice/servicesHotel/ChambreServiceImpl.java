@@ -1,6 +1,7 @@
 package com.example.hotelmanagementservice.servicesHotel;
 
 import com.example.hotelmanagementservice.dao.entities.Chambre;
+import com.example.hotelmanagementservice.dao.entities.Hotel;
 import com.example.hotelmanagementservice.dao.repository.ChambreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,11 @@ public class ChambreServiceImpl implements ChambreService {
 
     @Override
     public List<Chambre> findAll() {
+        return chambreRepository.findAll();
+    }
+
+    @Override
+    public List<Chambre> getAllChambres() {
         return chambreRepository.findAll();
     }
 

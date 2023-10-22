@@ -11,7 +11,7 @@ public interface ReservationService {
 
     Reservation createReservation(Reservation reservation);
 
-    public Reservation addReservation(Reservation reservation, Hotel hotel, Chambre chambre);
+    public Reservation addReservation(Reservation reservation, Hotel hotel, Chambre chambre ,String userId);
 
     List<Reservation> getAllReservations();
     Reservation getReservationById(Integer idReservation);

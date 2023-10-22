@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "nodejs-service")
+@FeignClient(name = "nodejs-service", url = "http://localhost:9000")
 public interface userServices {
-
-
+    @GetMapping(value = "/user/user/{userId}", produces = "application/json")
+    public User getUserById( @PathVariable String userId);
     @GetMapping("/users")
-    public List<User> findAll();
+    public List<User> getAllUsers();
 
-    @GetMapping("/users/{idUser}")
-    public User findById(@PathVariable String idUser);
+
+
 
 
 
