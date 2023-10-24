@@ -65,7 +65,7 @@ public class HotelController {
         return hotelService.updateHotel(idHotel, hotel);
     }
 
-    @DeleteMapping("/hotel/supprimer/{id}")
+    @DeleteMapping("/hotel/supprimer/{idHotel}")
     public void deleteHotel(@PathVariable Integer idHotel) {
         hotelService.deleteHotel(idHotel);
     }
